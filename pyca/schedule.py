@@ -69,7 +69,7 @@ def get_schedule():
     lookahead = config()['agent']['cal_lookahead'] * 24 * 60 * 60
     if lookahead:
         params['cutoff'] = str((timestamp() + lookahead) * 1000)
-    uri = '%s/calendars?%s' % (config()['service-scheduler'][0],
+    uri = '%s/calendars?%s' % (config()['service']['scheduler'][0],
                                urlencode(params))
     try:
         vcal = http_request(uri)

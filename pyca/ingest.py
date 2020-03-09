@@ -52,7 +52,7 @@ def ingest(event):
     # The ingest service to use is selected at random from the available
     # ingest services to ensure that not every capture agent uses the same
     # service at the same time
-    service = config('service-ingest')
+    service = config('service')['ingest']
     service = service[randrange(0, len(service))]
     logger.info('Selecting ingest service to use: ' + service)
 

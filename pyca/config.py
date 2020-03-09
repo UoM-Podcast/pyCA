@@ -40,6 +40,11 @@ password         = string(default='CHANGE_ME')
 insecure         = boolean(default=False)
 certificate      = string(default='')
 
+[service]
+capture.admin    = force_list(default=list())
+ingest           = force_list(default=list())
+scheduler        = force_list(default=list())
+
 [ui]
 username         = string(default='admin')
 password         = string(default='opencast')

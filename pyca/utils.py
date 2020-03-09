@@ -113,13 +113,14 @@ def configure_service(service):
     '''Get the location of a given service from Opencast and add it to the
     current configuration.
     '''
-    while not config().get('service-' + service) and not terminate():
+    while not config()['service'][service] and not terminate():
         try:
-            config()['service-' + service] = \
+            config()['service'][service] = \
                 get_service('org.opencastproject.' + service)
+                    
         except pycurl.error as e:
             logger.error('Could not get %s endpoint: %s. Retrying in 5s' %
-                         (service, e))
+                        (service, e))
             time.sleep(5.0)
 
 
@@ -141,7 +142,7 @@ def register_ca(status='idle'):
         return
     params = [('address', config()['ui']['url']), ('state', status)]
     name = urlquote(config()['agent']['name'].encode('utf-8'), safe='')
-    url = '%s/agents/%s' % (config()['service-capture.admin'][0], name)
+    url = '%s/agents/%s' % (config()['service']['capture.admin'][0], name)
     try:
         response = http_request(url, params).decode('utf-8')
         if response:
@@ -162,7 +163,7 @@ def recording_state(recording_id, status):
     if config()['agent']['backup_mode']:
         return
     params = [('state', status)]
-    url = config()['service-capture.admin'][0]
+    url = config()['service']['capture.admin'][0]
     url += '/recordings/%s' % recording_id
     try:
         result = http_request(url, params)

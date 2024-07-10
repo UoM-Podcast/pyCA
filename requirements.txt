@@ -6,3 +6,4 @@ sdnotify>=0.3.2
 psutil>=5.0.1
 flask>=0.12.2
 prometheus_client>=0.9
+zipp>=3.19.1 # not directly required, pinned by Snyk to avoid a vulnerability
